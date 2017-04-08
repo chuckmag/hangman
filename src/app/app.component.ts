@@ -27,4 +27,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.getHangmanGameState();
   }
+
+  handleMakeGuessEvent(arg) {
+    this.hangmanGameState = arg;
+  }
 }

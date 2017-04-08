@@ -1,10 +1,14 @@
-<md-card>
-  <h1>
-    {{guesses}}
-  </h1>
-  <ul class="letter-guesses">
-    <li *ngFor="let letter of ALPHABET.split('')" (click)="onLetterSelect(letter)">
-      <button md-raised-button color="primary">{{letter}}</button>
-    </li>
-  </ul>
+<md-card *ngIf="'undefined' !== typeof guesses">
+  <h1>Guesses : {{guesses}}</h1>
+  
+  <div *ngFor="let letter of ALPHABET.split('')">
+    <button *ngIf="guesses.indexOf(letter) === -1; else elseBlock"  
+    (click)="onLetterSelect(letter)"
+    md-raised-button color="primary">{{letter}}
+    </button>
+    <ng-template #elseBlock>
+      <button md-raised-button color="accent">{{letter}}
+      </button>
+    </ng-template>
+  </div>
 </md-card>
