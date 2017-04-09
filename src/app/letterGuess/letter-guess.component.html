@@ -2,7 +2,7 @@
   <h1>Guesses : {{guesses}}</h1>
   
   <div *ngFor="let letter of ALPHABET.split('')">
-    <button *ngIf="guesses.indexOf(letter) === -1; else elseBlock"  
+    <button *ngIf="guesses?.indexOf(letter) === -1; else elseBlock"  
     (click)="onLetterSelect(letter)"
     md-raised-button color="primary">{{letter}}
     </button>

@@ -10,7 +10,7 @@ export class LetterGuessComponent {
   @Input() guesses: string = "";
   guessesin: string = "";
   @Output() makeGuessEvent: EventEmitter<string> = new EventEmitter();
-  ALPHABET: string = " abcdefghijklmnopqrstuvwxyz";
+  ALPHABET: string = "abcdefghijklmnopqrstuvwxyz";
 
   constructor() {
     this.guesses = "";
