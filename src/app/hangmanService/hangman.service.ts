@@ -1,18 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HangmanGameState } from '../hangmanGameState';
+import { RANDOM_WORDS } from './random-words'; 
 
+const INCORRECT_GUESS_LIMIT: number = 10;
 @Injectable()
 export class HangmanService {
-    secretWord: string;
-    hangManGameState: HangmanGameState = this.initialHangmentGameState();
+    secretWord: string  ;
+    hangManGameState: HangmanGameState;
+
+    constructor() {
+        this.hangManGameState = this.initialHangmentGameState();
+    }
+
+    private getRandomWord(): string {
+        return RANDOM_WORDS[Math.floor(Math.random()*RANDOM_WORDS.length)];
+    }
 
     private initialHangmentGameState() : HangmanGameState {
-        this.secretWord = 'build';
+        this.secretWord = this.getRandomWord();
         return { hiddenWord: this.secretWord.replace(/([a-z])/g, '_'),
             guesses: '',
             incorrectGuesses: '',
             sessionId: '1',
-            incorrectGuessCount: 0 };
+            incorrectGuessCount: 0,
+            gameOver: false
+        };
+    }
+
+    startHangmanGameState() : Promise<HangmanGameState> {
+        this.hangManGameState = this.initialHangmentGameState();
+        return Promise.resolve(this.hangManGameState);
     }
 
     getHangManGameState() : Promise<HangmanGameState> {
@@ -33,7 +50,9 @@ export class HangmanService {
             }
         }
 
-        let re = new RegExp("!([" + this.hangManGameState.guesses + "])", "g");
+        this.hangManGameState.gameOver = this.hangManGameState.incorrectGuessCount 
+            >= INCORRECT_GUESS_LIMIT || hiddenWord.indexOf('_') === -1;
+        
         this.hangManGameState.hiddenWord = hiddenWord;
         return Promise.resolve(this.hangManGameState);
     }

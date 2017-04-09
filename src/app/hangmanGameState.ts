@@ -4,4 +4,5 @@ export class HangmanGameState {
     guesses: string;
     incorrectGuesses: string;
     incorrectGuessCount: number;
+    gameOver: boolean;
 }

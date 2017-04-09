@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import { AppComponent, WinContent, LoseContent } from './app.component';
 import { HiddenWordComponent } from './hiddenWord/hidden-word.component';
 import { LetterGuessComponent } from './letterGuess/letter-guess.component';
 import { IncorrectGuessesComponent } from './incorrectGuesses/incorrect-guesses.component';
@@ -17,7 +17,13 @@ import { IncorrectGuessesComponent } from './incorrectGuesses/incorrect-guesses.
     AppComponent,
     HiddenWordComponent,
     LetterGuessComponent,
-    IncorrectGuessesComponent
+    IncorrectGuessesComponent,
+    WinContent,
+    LoseContent
+  ],
+  entryComponents: [
+    WinContent,
+    LoseContent
   ],
   imports: [
     BrowserModule,

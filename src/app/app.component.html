@@ -13,5 +13,5 @@
   <incorrect-guesses [incorrectGuesses]="hangmanGameState.incorrectGuesses"
     [incorrectGuessCount]="hangmanGameState.incorrectGuessCount"></incorrect-guesses>
   <hidden-word [word]="hangmanGameState.hiddenWord"></hidden-word>
-  <letter-guess [guesses]="hangmanGameState.guesses" (makeGuessEvent)="handleMakeGuessEvent($event)" ></letter-guess>
+  <letter-guess [guesses]="hangmanGameState.guesses" (makeGuessEvent)="handleHangmanGameStateUpdateEvent($event)" ></letter-guess>
 </div>
