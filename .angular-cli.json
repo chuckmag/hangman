@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "hangmanServer/bin/angular",
       "assets": [
         "assets",
         "favicon.ico"
