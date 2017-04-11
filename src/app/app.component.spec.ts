@@ -1,13 +1,47 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import { AppComponent } from './app.component';
+import { AppComponent, WinContent, LoseContent } from './app.component';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from '@angular/material';
+import 'hammerjs';
+
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+// Imports for loading & configuring the in-memory web api
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data.service';
+
+import { HiddenWordComponent } from './hiddenWord/hidden-word.component';
+import { LetterGuessComponent } from './letterGuess/letter-guess.component';
+import { IncorrectGuessesComponent } from './incorrectGuesses/incorrect-guesses.component';
+import { HangmanService } from './hangmanService/hangman.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+        declarations: [
+          AppComponent,
+          HiddenWordComponent,
+          LetterGuessComponent,
+          IncorrectGuessesComponent,
+          WinContent,
+          LoseContent
+        ],
+        imports: [
+          BrowserModule,
+          FormsModule,
+          HttpModule,
+          BrowserAnimationsModule,
+          MaterialModule,
+          InMemoryWebApiModule.forRoot(InMemoryDataService),
+        ],
+        providers: [
+          HangmanService
+        ]
     }).compileComponents();
   }));
 

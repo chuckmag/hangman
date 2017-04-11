@@ -1,4 +1,5 @@
 import { Component, OnInit, Optional } from '@angular/core';
+import { } from '@angular/'
 
 import { HangmanGameState } from './hangmanGameState';
 import { HangmanService } from './hangmanService/hangman.service';
@@ -15,11 +16,19 @@ export class AppComponent implements OnInit {
   title = 'Hang Man!';
   hangmanGameState: HangmanGameState;
   snackBarShown: boolean = false;
+  makingGuess: boolean = false;
 
   constructor(private hangmanService: HangmanService,
     private _dialog: MdDialog,
     private _snackbar: MdSnackBar) {
     this.hangmanGameState = new HangmanGameState();
+
+    // if (window.localStorage && localStorage.hangmanGameState) {
+    //   this.hangmanGameState = JSON.parse(localStorage.getItem("hangmanGameState")) as HangmanGameState;
+    // }
+    // else {
+    //   this.hangmanGameState = new HangmanGameState();
+    // }
   }
 
   ngOnInit(): void {
@@ -37,6 +46,11 @@ export class AppComponent implements OnInit {
 
   setHangmanGameState(hangmanGameState: HangmanGameState): void {
     this.hangmanGameState = hangmanGameState;
+
+    // if (window.localStorage) {
+    //   localStorage.setItem('hangmanGameState', JSON.stringify(hangmanGameState));
+    // }
+
     console.log(hangmanGameState);
 
     if (this.snackBarShown) {
@@ -72,15 +86,17 @@ export class AppComponent implements OnInit {
   }
 
   getHangmanGameState(): void {
-    this.hangmanService.getHangManGameState()
+    this.hangmanService.getHangManGameState(this.hangmanGameState.id)
       .then(hangmanGameState => {
         this.setHangmanGameState(hangmanGameState);
       });
   }
 
   handleHangmanGameStateUpdateEvent(arg) {
-    this.hangmanService.makeGuess(arg)
+    this.makingGuess = true;
+    this.hangmanService.makeGuess(this.hangmanGameState, arg)
         .then(hangmanGameState => {
+          this.makingGuess = false;
           this.setHangmanGameState(hangmanGameState);
       });
   }

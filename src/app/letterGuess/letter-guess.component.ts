@@ -8,7 +8,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export class LetterGuessComponent {
   @Input() guesses: string = "";
-  guessesin: string = "";
+  @Input() makingGuess: boolean = false;
+
   @Output() makeGuessEvent: EventEmitter<string> = new EventEmitter();
   ALPHABET: string = "abcdefghijklmnopqrstuvwxyz";
 
@@ -17,6 +18,9 @@ export class LetterGuessComponent {
   }
 
   onLetterSelect(letter: string): void {
+      if (this.makingGuess) {
+          return;
+      }
     console.log(letter);
     this.guesses += letter;
     this.makeGuessEvent.next(letter);
