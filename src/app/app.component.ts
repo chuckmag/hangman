@@ -9,7 +9,8 @@ import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: [
+    './app.component.css'],
   providers: [HangmanService]
 })
 export class AppComponent implements OnInit {

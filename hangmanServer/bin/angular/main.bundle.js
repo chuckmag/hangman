@@ -153,7 +153,7 @@ module.exports = module.exports.toString();
 /***/ 163:
 /***/ (function(module, exports) {
 
-module.exports = "<md-toolbar color=\"primary\">\n  <button class=\"app-icon-button\" (click)=\"sidenav.toggle()\">\n    <i class=\"material-icons app-toolbar-menu\">menu</i>\n  </button>\n\n  \n  {{title}}\n\n  <span class=\"app-toolbar-filler\"></span>\n  <button md-button (click)=\"isDarkTheme = !isDarkTheme\">TOGGLE DARK THEME</button>\n</md-toolbar>\n<div class=\"app-content\">\n  <incorrect-guesses [incorrectGuesses]=\"hangmanGameState.incorrectGuesses\"\n    [incorrectGuessCount]=\"hangmanGameState.incorrectGuessCount\"></incorrect-guesses>\n  <hidden-word [word]=\"hangmanGameState.hiddenWord\"></hidden-word>\n  <letter-guess [guesses]=\"hangmanGameState.guesses\" [makingGuess]=\"makingGuess\" (makeGuessEvent)=\"handleHangmanGameStateUpdateEvent($event)\" ></letter-guess>\n</div>\n"
+module.exports = "<md-toolbar color=\"primary\">\n  <button class=\"app-icon-button\" (click)=\"sidenav.toggle()\">\n    <i class=\"material-icons app-toolbar-menu\">menu</i>\n  </button>\n\n  \n  {{title}}\n\n  <span class=\"app-toolbar-filler\"></span>\n</md-toolbar>\n<div class=\"app-content\">\n  <incorrect-guesses [incorrectGuesses]=\"hangmanGameState.incorrectGuesses\"\n    [incorrectGuessCount]=\"hangmanGameState.incorrectGuessCount\"></incorrect-guesses>\n  <hidden-word [word]=\"hangmanGameState.hiddenWord\"></hidden-word>\n  <letter-guess [guesses]=\"hangmanGameState.guesses\" [makingGuess]=\"makingGuess\" (makeGuessEvent)=\"handleHangmanGameStateUpdateEvent($event)\" ></letter-guess>\n</div>\n"
 
 /***/ }),
 
