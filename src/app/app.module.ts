@@ -15,7 +15,28 @@ import { AppComponent, WinContent, LoseContent } from './app.component';
 import { HiddenWordComponent } from './hiddenWord/hidden-word.component';
 import { LetterGuessComponent } from './letterGuess/letter-guess.component';
 import { IncorrectGuessesComponent } from './incorrectGuesses/incorrect-guesses.component';
+
+import { IHangmanService } from './hangmanService/iHangman.service';
 import { HangmanService } from './hangmanService/hangman.service';
+import { MockHangmanService } from './hangmanService/mockHangman.service';
+
+var providers = [];
+var imports = [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    BrowserAnimationsModule,
+    MaterialModule
+  ];
+function enableProd(enable) {
+    if (enable) {
+        providers.push({ provide: 'IHangmanService', useClass: HangmanService });
+    } else {
+        providers.push({ provide: 'IHangmanService', useClass: MockHangmanService });
+        //imports.push(InMemoryWebApiModule.forRoot(InMemoryDataService));
+    }
+}
+enableProd(true);
 
 
 @NgModule({
@@ -31,17 +52,8 @@ import { HangmanService } from './hangmanService/hangman.service';
     WinContent,
     LoseContent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
-  ],
-  providers: [
-    HangmanService
-  ],
+  imports: imports,
+  providers: providers,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

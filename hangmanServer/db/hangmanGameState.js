@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var randomWords = require('./random-words');
 
+var INCORRECT_GUESS_LIMIT = 10;
+
 var hangmanSchema = mongoose.Schema({
     hiddenWord: String,
     guesses: String,
@@ -22,6 +24,8 @@ hangmanSchema.methods.maskSecretWord = function () {
 
 hangmanSchema.methods.addGuess = function (guess) {
     this.guesses += guess;
+    this.incorrectGuesses += this.secretWord.indexOf(guess) === -1 ? guess : '';
+    this.incorrectGuessCount += this.secretWord.indexOf(guess) === -1 ? 1 : 0;
 
     let hiddenWord = '';
     for (let i = 0; i < this.secretWord.length; i++) {
@@ -33,6 +37,9 @@ hangmanSchema.methods.addGuess = function (guess) {
     }
 
     this.hiddenWord = hiddenWord;
+    
+    this.gameOver = this.incorrectGuessCount 
+        >= INCORRECT_GUESS_LIMIT || hiddenWord.indexOf('_') === -1;
 }
 
 var HangmanGameState = mongoose.model('HangmanGameState', hangmanSchema);
@@ -68,6 +75,10 @@ exports.updateById = function (req) {
 // .then(function (hangman) {console.log(hangman)});
 exports.addGuess = function (req) {
     var guess = req.body.guess;
+
+    if (!req.body.guess) {
+        return Promise.reject('The guess must be a valid character.');
+    }
 
     return HangmanGameState.findById(req.params.id).exec().then(function (hangman) {
         hangman.addGuess(guess);

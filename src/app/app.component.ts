@@ -4,6 +4,10 @@ import { } from '@angular/'
 import { HangmanGameState } from './hangmanGameState';
 import { HangmanService } from './hangmanService/hangman.service';
 
+// Can not get the dependency injector to work the way 
+// I would like, going to table that
+//import { IHangmanService } from './hangmanService/iHangman.service';
+
 import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
 
 @Component({
@@ -87,7 +91,7 @@ export class AppComponent implements OnInit {
   }
 
   getHangmanGameState(): void {
-    this.hangmanService.getHangManGameState(this.hangmanGameState.id)
+    this.hangmanService.getHangManGameState(this.hangmanGameState._id)
       .then(hangmanGameState => {
         this.setHangmanGameState(hangmanGameState);
       });
@@ -95,13 +99,16 @@ export class AppComponent implements OnInit {
 
   handleHangmanGameStateUpdateEvent(arg) {
     this.makingGuess = true;
-    this.hangmanService.makeGuess(this.hangmanGameState, arg)
+    this.hangmanService.makeGuess(this.hangmanGameState._id, arg)
         .then(hangmanGameState => {
           this.makingGuess = false;
           this.setHangmanGameState(hangmanGameState);
-      });
+      })
+      .catch();
   }
 }
+
+
 
 @Component({
   template: `
@@ -129,3 +136,4 @@ export class WinContent {
 export class LoseContent {
   constructor(@Optional() public dialogRef: MdDialogRef<WinContent>) { }
 }
+

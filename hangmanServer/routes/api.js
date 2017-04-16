@@ -38,7 +38,10 @@ db.once('open', function callback() {
     repositories[req.params.resource].getNewGameState().then(function (hangman) {
         console.log(hangman);
         res.json(hangman);
-    }).catch(rejectionHandler);
+    }).catch(function (rejectReason) {
+        console.log(rejectReason);
+        res.sendStatus(500);
+    });
   });
 
   router.get('/:resource/:id', function (req, res, next) {
@@ -46,7 +49,10 @@ db.once('open', function callback() {
     repositories[req.params.resource].findById(req).then(function (resource) {
         console.log(resource);
         res.json(resource);
-    }).catch(rejectionHandler);
+    }).catch(function (rejectReason) {
+        console.log(rejectReason);
+        res.sendStatus(500);
+    });
   });
 
   router.put('/:resource/:id', function (req, res, next) {
@@ -58,7 +64,10 @@ db.once('open', function callback() {
     repositories[req.params.resource].addGuess(req).then(function (hangman) {
         console.log(hangman);
         res.json(hangman);
-    }).catch(rejectionHandler);
+    }).catch(function (rejectReason) {
+        console.log(rejectReason);
+        res.sendStatus(500);
+    });
   });
 
   // this is only for testing purposes
@@ -69,7 +78,10 @@ db.once('open', function callback() {
     repositories[req.params.resource].create(req).then(function (hangman) {
         console.log(hangman);
         res.json(hangman);
-    }).catch(rejectionHandler);
+    }).catch(function (rejectReason) {
+        console.log(rejectReason);
+        res.sendStatus(500);
+    });
   });
 });
 

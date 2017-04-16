@@ -1,5 +1,5 @@
 export class HangmanGameState {
-    id: number;
+    _id: string;
     hiddenWord: string;
     guesses: string;
     incorrectGuesses: string;
