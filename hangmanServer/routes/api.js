@@ -55,7 +55,7 @@ db.once('open', function callback() {
     //     console.log(hangman);
     //     res.json(hangman);
     // });
-    repositories[req.params.resource].makeGuess(req).then(function (hangman) {
+    repositories[req.params.resource].addGuess(req).then(function (hangman) {
         console.log(hangman);
         res.json(hangman);
     }).catch(rejectionHandler);

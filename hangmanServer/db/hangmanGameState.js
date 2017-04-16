@@ -68,13 +68,13 @@ exports.updateById = function (req) {
 // .then(function (hangman) {console.log(hangman)});
 exports.addGuess = function (req) {
     var guess = req.body.guess;
-    
-    HangmanGameState.findById(req.params.id).exec().then(function (hangman) {
+
+    return HangmanGameState.findById(req.params.id).exec().then(function (hangman) {
         hangman.addGuess(guess);
         return hangman.save();
     }).then(function (hangman) {
         return Promise.resolve(hangman.maskSecretWord());
-    })
+    });
 };
 
 exports.getNewGameState = function() {    
