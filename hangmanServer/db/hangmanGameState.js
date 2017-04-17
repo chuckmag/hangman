@@ -13,13 +13,8 @@ var hangmanSchema = mongoose.Schema({
 });
 
 hangmanSchema.methods.maskSecretWord = function () {
-    return  new HangmanGameState({hiddenWord: this.hiddenWord,
-        guesses: this.guesses,
-        incorrectGuesses: this.incorrectGuesses,
-        incorrectGuessCount: this.incorrectGuessCount,
-        gameOver: this.gameOver,
-        secretWord: ''
-        });
+    this.secretWord = '';
+    return  this;
 }
 
 hangmanSchema.methods.addGuess = function (guess) {
@@ -53,7 +48,6 @@ exports.findAll = function () {
 // returns the promise
 // .then(function (hangman) {console.log(hangman)});
 exports.findById = function (req) {
-    console.log("Finding the hangmanGameState with id: " + req.params.id);
     return HangmanGameState.findById(req.params.id).exec().then(function (hangman) {
         return Promise.resolve(hangman.maskSecretWord());
     });

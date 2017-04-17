@@ -28,12 +28,12 @@ export class AppComponent implements OnInit {
     private _snackbar: MdSnackBar) {
     this.hangmanGameState = new HangmanGameState();
 
-    // if (window.localStorage && localStorage.hangmanGameState) {
-    //   this.hangmanGameState = JSON.parse(localStorage.getItem("hangmanGameState")) as HangmanGameState;
-    // }
-    // else {
-    //   this.hangmanGameState = new HangmanGameState();
-    // }
+    if (window.localStorage && localStorage.hangmanGameState) {
+      this.hangmanGameState = JSON.parse(localStorage.getItem("hangmanGameState")) as HangmanGameState;
+    }
+    else {
+      this.hangmanGameState = new HangmanGameState();
+    }
   }
 
   ngOnInit(): void {
@@ -52,9 +52,9 @@ export class AppComponent implements OnInit {
   setHangmanGameState(hangmanGameState: HangmanGameState): void {
     this.hangmanGameState = hangmanGameState;
 
-    // if (window.localStorage) {
-    //   localStorage.setItem('hangmanGameState', JSON.stringify(hangmanGameState));
-    // }
+    if (window.localStorage) {
+      localStorage.setItem('hangmanGameState', JSON.stringify(hangmanGameState));
+    }
 
     console.log(hangmanGameState);
 
@@ -91,6 +91,11 @@ export class AppComponent implements OnInit {
   }
 
   getHangmanGameState(): void {
+    if (!this.hangmanGameState._id) {
+      this.startNewHangmanGame();
+      return;
+    }
+
     this.hangmanService.getHangManGameState(this.hangmanGameState._id)
       .then(hangmanGameState => {
         this.setHangmanGameState(hangmanGameState);
@@ -104,7 +109,10 @@ export class AppComponent implements OnInit {
           this.makingGuess = false;
           this.setHangmanGameState(hangmanGameState);
       })
-      .catch();
+      .catch(error => {
+        this.makingGuess = false;
+        this.setHangmanGameState(this.hangmanGameState);
+      });
   }
 }
 

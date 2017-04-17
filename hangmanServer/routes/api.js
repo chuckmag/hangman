@@ -27,7 +27,7 @@ db.once('open', function callback() {
   console.log('Successfully connected to MongoDB.');
 
   router.get('/:resource', function (req, res, next) {
-    // find all, just for testing purposes
+    //find all, just for testing purposes
     // res.type('application/json');
     // repositories[req.params.resource].findAll().then(function (resources){
     //   console.log(resources);
@@ -37,7 +37,7 @@ db.once('open', function callback() {
     res.type('application/json');
     repositories[req.params.resource].getNewGameState().then(function (hangman) {
         console.log(hangman);
-        res.json(hangman);
+        res.json({data: hangman});
     }).catch(function (rejectReason) {
         console.log(rejectReason);
         res.sendStatus(500);
@@ -48,7 +48,7 @@ db.once('open', function callback() {
     res.type('application/json');
     repositories[req.params.resource].findById(req).then(function (resource) {
         console.log(resource);
-        res.json(resource);
+        res.json({data: resource});
     }).catch(function (rejectReason) {
         console.log(rejectReason);
         res.sendStatus(500);
@@ -63,7 +63,7 @@ db.once('open', function callback() {
     // });
     repositories[req.params.resource].addGuess(req).then(function (hangman) {
         console.log(hangman);
-        res.json(hangman);
+        res.json({data: hangman});
     }).catch(function (rejectReason) {
         console.log(rejectReason);
         res.sendStatus(500);
@@ -77,7 +77,7 @@ db.once('open', function callback() {
     req.body.HangmanGameState;
     repositories[req.params.resource].create(req).then(function (hangman) {
         console.log(hangman);
-        res.json(hangman);
+        res.json({data: hangman});
     }).catch(function (rejectReason) {
         console.log(rejectReason);
         res.sendStatus(500);

@@ -43,7 +43,7 @@ export class HangmanService implements IHangmanService {
 
     makeGuess(id: string, guess: string) : Promise<HangmanGameState> {
         const url = this.hangmanGameStateUrl + '/' + id;
-        return this.http.put(url, JSON.stringify(guess), {headers: this.headers})
+        return this.http.put(url, JSON.stringify({guess: guess}), {headers: this.headers})
             .toPromise()
             .then(response => response.json().data as HangmanGameState)
             .catch(this.handleError);

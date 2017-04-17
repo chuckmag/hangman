@@ -1,6 +1,17 @@
 <md-card>
-  <div >
-    <h1>{{incorrectGuessCount}}</h1>
+  <div [ngSwitch]="incorrectGuessCount">
+    <img *ngSwitchCase="0" src="./assets/hangman0.png" >
+    <img *ngSwitchCase="1" src="./assets/hangman1.png" >
+    <img *ngSwitchCase="2" src="./assets/hangman2.png" >
+    <img *ngSwitchCase="3" src="./assets/hangman3.png" >
+    <img *ngSwitchCase="4" src="./assets/hangman4.png" >
+    <img *ngSwitchCase="5" src="./assets/hangman5.png" >
+    <img *ngSwitchCase="6" src="./assets/hangman6.png" >
+    <img *ngSwitchCase="7" src="./assets/hangman7.png" >
+    <img *ngSwitchCase="8" src="./assets/hangman8.png" >
+    <img *ngSwitchCase="9" src="./assets/hangman9.png" >
+    <img *ngSwitchCase="10" src="./assets/hangman10.png" >
+    <img *ngSwitchCase="default" src="./assets/hangman10.png" >
   </div>
   
   <div>
