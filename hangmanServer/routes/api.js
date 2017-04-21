@@ -36,10 +36,10 @@ db.once('open', function callback() {
     
     res.type('application/json');
     repositories[req.params.resource].getNewGameState().then(function (hangman) {
-        console.log(hangman);
+        //console.log(hangman);
         res.json({data: hangman});
     }).catch(function (rejectReason) {
-        console.log(rejectReason);
+        //console.log(rejectReason);
         res.sendStatus(500);
     });
   });
@@ -47,10 +47,10 @@ db.once('open', function callback() {
   router.get('/:resource/:id', function (req, res, next) {
     res.type('application/json');
     repositories[req.params.resource].findById(req).then(function (resource) {
-        console.log(resource);
+        //console.log(resource);
         res.json({data: resource});
     }).catch(function (rejectReason) {
-        console.log(rejectReason);
+        //console.log(rejectReason);
         res.sendStatus(500);
     });
   });
@@ -62,10 +62,10 @@ db.once('open', function callback() {
     //     res.json(hangman);
     // });
     repositories[req.params.resource].addGuess(req).then(function (hangman) {
-        console.log(hangman);
+        //console.log(hangman);
         res.json({data: hangman});
     }).catch(function (rejectReason) {
-        console.log(rejectReason);
+        //console.log(rejectReason);
         res.sendStatus(500);
     });
   });
@@ -76,10 +76,10 @@ db.once('open', function callback() {
 
     req.body.HangmanGameState;
     repositories[req.params.resource].create(req).then(function (hangman) {
-        console.log(hangman);
+        //console.log(hangman);
         res.json({data: hangman});
     }).catch(function (rejectReason) {
-        console.log(rejectReason);
+        //console.log(rejectReason);
         res.sendStatus(500);
     });
   });

@@ -75,7 +75,7 @@ module.exports = module.exports.toString();
 /***/ 159:
 /***/ (function(module, exports) {
 
-module.exports = "<md-toolbar color=\"primary\">\n  <button class=\"app-icon-button\" (click)=\"sidenav.toggle()\">\n    <i class=\"material-icons app-toolbar-menu\">menu</i>\n  </button>\n\n  \n  {{title}}\n\n  <span class=\"app-toolbar-filler\"></span>\n</md-toolbar>\n<div class=\"app-content\">\n  <incorrect-guesses [incorrectGuesses]=\"hangmanGameState.incorrectGuesses\"\n    [incorrectGuessCount]=\"hangmanGameState.incorrectGuessCount\"></incorrect-guesses>\n  <hidden-word [word]=\"hangmanGameState.hiddenWord\"></hidden-word>\n  <letter-guess [guesses]=\"hangmanGameState.guesses\" [makingGuess]=\"makingGuess\" (makeGuessEvent)=\"handleHangmanGameStateUpdateEvent($event)\" ></letter-guess>\n</div>\n"
+module.exports = "<md-toolbar color=\"primary\">\n  \n  {{title}}\n\n  <span class=\"app-toolbar-filler\"></span>\n</md-toolbar>\n<div class=\"app-content\">\n  <incorrect-guesses [incorrectGuesses]=\"hangmanGameState.incorrectGuesses\"\n    [incorrectGuessCount]=\"hangmanGameState.incorrectGuessCount\"></incorrect-guesses>\n  <hidden-word [word]=\"hangmanGameState.hiddenWord\"></hidden-word>\n  <letter-guess [guesses]=\"hangmanGameState.guesses\" [makingGuess]=\"makingGuess\" (makeGuessEvent)=\"handleHangmanGameStateUpdateEvent($event)\" ></letter-guess>\n</div>\n"
 
 /***/ }),
 
@@ -96,7 +96,7 @@ module.exports = "<md-card>\r\n  <div [ngSwitch]=\"incorrectGuessCount\">\r\n   
 /***/ 162:
 /***/ (function(module, exports) {
 
-module.exports = "<md-card *ngIf=\"'undefined' !== typeof guesses\">\r\n  <h1>Guesses : {{guesses}}</h1>\r\n  \r\n  <div *ngFor=\"let letter of ALPHABET.split('')\">\r\n    <button *ngIf=\"guesses?.indexOf(letter) === -1; else elseBlock\"  \r\n    (click)=\"onLetterSelect(letter)\"\r\n    md-raised-button color=\"primary\">{{letter}}\r\n    </button>\r\n    <ng-template #elseBlock>\r\n      <button md-raised-button color=\"accent\">{{letter}}\r\n      </button>\r\n    </ng-template>\r\n  </div>\r\n</md-card>\r\n"
+module.exports = "<md-card >\r\n  <h1>Guesses : {{guesses}}</h1>\r\n  \r\n  <div *ngFor=\"let letter of ALPHABET.split('')\">\r\n    <button *ngIf=\"guesses?.indexOf(letter) === -1; else elseBlock\"  \r\n    (click)=\"onLetterSelect(letter)\"\r\n    md-raised-button color=\"primary\">{{letter}}\r\n    </button>\r\n    <ng-template #elseBlock>\r\n      <button md-raised-button color=\"accent\">{{letter}}\r\n      </button>\r\n    </ng-template>\r\n  </div>\r\n</md-card>\r\n"
 
 /***/ }),
 

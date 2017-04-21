@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
+## Requirements
+
+To run this application locally you will need to install the latest node.js and the latest mongoDB server.
+
+Before running the server make sure you start the local install of MongoDB so that is connects.  You can start the server with `npm start` in the `hangmanServer/` directory.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -12,7 +18,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `hangmanServer/bin/angular/` directory. Use the `-prod` flag for a production build.
 
 ## Running unit tests
 
