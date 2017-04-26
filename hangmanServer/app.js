@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 
 var api = require('./routes/api');
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 //var db = require('./db/hangmanDb');
 
@@ -35,9 +34,6 @@ var app = express();
 // }, 200);
 
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -48,7 +44,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/api', api)
 app.use('/', express.static('bin/angular'));
 

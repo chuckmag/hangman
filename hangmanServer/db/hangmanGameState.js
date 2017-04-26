@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-var randomWords = require('./random-words');
+const randomWords = require('./random-words');
 
-var INCORRECT_GUESS_LIMIT = 10;
+const INCORRECT_GUESS_LIMIT = 10;
 
-var hangmanSchema = mongoose.Schema({
+let hangmanSchema = mongoose.Schema({
     hiddenWord: String,
     guesses: String,
     incorrectGuesses: String,
@@ -37,7 +37,7 @@ hangmanSchema.methods.addGuess = function (guess) {
         >= INCORRECT_GUESS_LIMIT || hiddenWord.indexOf('_') === -1;
 }
 
-var HangmanGameState = mongoose.model('HangmanGameState', hangmanSchema);
+let HangmanGameState = mongoose.model('HangmanGameState', hangmanSchema);
 
 exports.HangmanGameState = HangmanGameState;
 
@@ -82,16 +82,23 @@ exports.addGuess = function (req) {
     });
 };
 
-exports.getNewGameState = function() {    
+const getInitialGameState = function() {
     let randomWord = randomWords[Math.floor(Math.random()*randomWords.length)];
-
-    return HangmanGameState.create({hiddenWord: randomWord.replace(/([a-z])/g, '_'),
+    let initialGameState = {hiddenWord: randomWord.replace(/([a-z])/g, '_'),
         guesses: '',
         incorrectGuesses: '',
         incorrectGuessCount: 0,
         gameOver: false,
         secretWord: randomWord
-    }).then(function (hangman) {
+    }
+
+    return initialGameState;
+}
+
+exports.getInitialGameState = getInitialGameState;
+
+exports.getNewGameState = function() {
+    return HangmanGameState.create(getInitialGameState()).then(function (hangman) {
         return Promise.resolve(hangman.maskSecretWord());
     });
 }

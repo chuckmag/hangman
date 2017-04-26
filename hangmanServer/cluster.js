@@ -7,7 +7,7 @@ if (cluster.isMaster) {
     cluster.fork();
   }
 
-   Object.keys(cluster.workers).forEach(function(id) {
+  Object.keys(cluster.workers).forEach(function(id) {
     console.log("I am running with ID : "+cluster.workers[id].process.pid);
   });
 
